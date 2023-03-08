@@ -20,7 +20,7 @@ Create a new React app and empty out the unnecessary files, and then install the
 
 # Step 2
 
-Create a `pages` folder in `src`, and inside this new folder create two new components:
+Create a `pages` folder in `src`, and inside this new folder create three new components:
 
 `PokemonList.js`
 
@@ -50,4 +50,19 @@ const PokemonDetail = () => {
 export default PokemonDetail;
 ```
 
-These will be the list/detail views that we will want to manage with React Router.
+and a 404 page
+
+`NotFound.js`
+
+```javascript
+const NotFound = () => {
+  return (
+    <div>
+      <h2>404 Page not Found</h2>
+    </div>
+  );
+};
+export default NotFound;
+```
+
+These will be the list/detail views, plus a catchall 404, that we will want to manage with React Router.
