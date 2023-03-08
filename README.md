@@ -334,3 +334,58 @@ export default PokemonDetail;
 ```
 
 Now whichever pokemon was clicked on will trigger the detail view with its name in the url, that then gets logged into the console when the detail view renders.
+
+# Step 9
+
+Now that the pokemon name is being successfully read in the detail view, it is time to use it to send another request to the API to get the detailed information on that specific pokemon.
+
+In `PokemonDetail.js` import `useEffect` and use it to create another side effect that GETs the information about the specific pokemon. To specify which Pokemon to retreive, attach the name to the end of the API url:
+
+```javascript
+const PokemonDetail = () => {
+  const name = useParams().name;
+
+  useEffect(() => {
+    const getPokemon = async () => {
+      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+      const json = await response.json();
+      console.log(json);
+    };
+    getPokemon();
+  }, []);
+
+  return (
+    <div>
+      <h2>Detail</h2>
+    </div>
+  );
+};
+export default PokemonDetail;
+```
+
+You should see the massive object that represents the pokemon in the console.
+
+Create a state variable with an initial value of null to store the pokemon object.
+
+```javascript
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
+const PokemonDetail = () => {
+  const [pokemon, setPokemon] = useState(null); // <--
+
+  const name = useParams().name;
+
+  useEffect(() => {
+    const getPokemon = async () => {
+      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+      const json = await response.json();
+      setPokemon(json); // <--
+    };
+    getPokemon();
+  }, []);
+
+  // etc
+```
+
+Setting the initial state to `null` means that we can use conditional rendering to avoid trying to render the pokemon before its data has arrived from the async `fetch()`. Null is falsy whereas an object is truthy, so this means with conditional rendering we can use an if statement or ternary operator to prevent tyring to render anything before the data arrives, which would lead to `not defined` errors.
