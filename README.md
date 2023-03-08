@@ -300,3 +300,37 @@ Do this by modifying the link as follows:
 This concatenates the `name` prop after a forward slash, meaning the links in the list will now point to `localhost:3000/<pokemon name>`, which matches with the `PokemnoDetail.js` route.
 
 Now clicking on a link causes the detail view to laod with the clicked pokemon's name in the url
+
+# Step 8
+
+Now in the `PokemonDetail.js` component we want to render the details of the pokemon.
+
+The name of the pokemon is in the url, which we can use to send a request for that specific pokemon since the API allows retreiving by name as well as id:
+`https://pokeapi.co/api/v2/pokemon/bulbasaur` for example will fetch the data for Pokemon #1: Bulbasaur
+
+To read the parameter in the url (called `name` as defined in the `Routes.js` file: `path="/:name"`), import the `useParams` hook from `'react-router-dom'` in `PokemonDetail.js`:
+
+```javascript
+import { useParams } from "react-router-dom";
+```
+
+This hook can be used to return all the url params defined on the `Route path=""` prop in `Routes.js`
+
+Access the `name` parameter and console.log it
+
+```javascript
+import { useParams } from "react-router-dom";
+
+const PokemonDetail = () => {
+  const name = useParams().name;
+  console.log(name);
+  return (
+    <div>
+      <h2>Detail</h2>
+    </div>
+  );
+};
+export default PokemonDetail;
+```
+
+Now whichever pokemon was clicked on will trigger the detail view with its name in the url, that then gets logged into the console when the detail view renders.
