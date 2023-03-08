@@ -17,3 +17,37 @@ etc
 
 Create a new React app and empty out the unnecessary files, and then install the react browser router:
 `npm install react-router-dom`
+
+# Step 2
+
+Create a `pages` folder in `src`, and inside this new folder create two new components:
+
+`PokemonList.js`
+
+```javascript
+const PokemonList = () => {
+  return (
+    <div>
+      <h2>List</h2>
+    </div>
+  );
+};
+export default PokemonList;
+```
+
+and
+
+`PokemonDetail.js`
+
+```javascript
+const PokemonDetail = () => {
+  return (
+    <div>
+      <h2>Detail</h2>
+    </div>
+  );
+};
+export default PokemonDetail;
+```
+
+These will be the list/detail views that we will want to manage with React Router.
