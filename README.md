@@ -178,3 +178,38 @@ useEffect(() => {
   getPokemonList();
 }, []);
 ```
+
+# Step 5
+
+Time to render the list out rather than console.log it. First, we need to store the list somewhere.
+
+Create a new state variable in `PokemonList.js` by importing the `useState` hook from React (add it to the existing `useEffect` import):
+
+```javascript
+import { useEffect, useState } from "react";`
+```
+
+In the `PokemonList` component itself, above the useEffect fetch, create a state variable using `useState` with an initial value set to an empty array (this allows the use of .map later even while waiting for the data to come back from the API):
+
+```javascript
+import { useEffect, useState } from "react";
+const PokemonList = () => {
+  const [pokemonArray, setPokemonArray] = useState([]);
+  // continued...
+```
+
+FInally, modify the fetch function so that instead of console.log the data it sets the results array from the json data to the state variable and then logs that instead:
+
+```javascript
+useEffect(() => {
+  const getPokemonList = async () => {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/`);
+    const json = await response.json();
+    setPokemonArray(json.results); // <--
+    console.log(pokemonArray); // <--
+  };
+  getPokemonList();
+}, []);
+```
+
+At this stage you should see an array of pokemon in the browser console.
