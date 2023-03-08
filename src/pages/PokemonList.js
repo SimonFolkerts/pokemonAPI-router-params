@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PokemonListItem from "../components/PokemonListItem";
 const PokemonList = () => {
   const [pokemonArray, setPokemonArray] = useState([]);
 
@@ -12,9 +13,14 @@ const PokemonList = () => {
     getPokemonList();
   }, []);
 
+  const listItems = pokemonArray.map((item) => {
+    return <PokemonListItem key={item.name} name={item.name} />;
+  });
+
   return (
     <div>
       <h2>List</h2>
+      <ul>{listItems}</ul>
     </div>
   );
 };

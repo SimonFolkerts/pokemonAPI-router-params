@@ -213,3 +213,45 @@ useEffect(() => {
 ```
 
 At this stage you should see an array of pokemon in the browser console.
+
+# Step 6
+
+Create a folder called `components` in `src` and make a new component in it called `PokemonListItem.js`.
+
+`PokemonListItem.js`:
+
+```javascript
+const PokemonListItem = ({ name }) => {
+  return (
+    <li>
+      <h3>{name}</h3>
+    </li>
+  );
+};
+export default PokemonListItem;
+```
+
+This accepts a single prop called `name`.
+Import this component into the `PokemonList.js` component.
+
+```javascript
+import PokemonListItem from "../components/PokemonListItem";
+```
+
+Now right above the template `return`, run `.map()` on the `pokemonArray`, using it to generate instances of the `PokemonListItem` component with the pokemon name injected in as a prop; finally place the resulting array of list items into the template itself:
+
+```javascript
+  const listItems = pokemonArray.map((item) => {
+    return <PokemonListItem key={item.name} name={item.name} />;
+  });
+
+  return (
+    <div>
+      <h2>List</h2>
+      <ul>{listItems}</ul>
+    </div>
+  );
+};
+```
+
+Now the pokemon are rendered into the DOM
