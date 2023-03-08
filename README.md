@@ -255,3 +255,48 @@ Now right above the template `return`, run `.map()` on the `pokemonArray`, using
 ```
 
 Now the pokemon are rendered into the DOM
+
+# Step 7
+
+When a pokemon in the list is clicked, we want the router to switch over to the detail view, with the clicked pokemon name in the url so that it cn be used to send a GET request for that pokemon's data.
+
+In `PokemonListItem.js`, import the `Link` component from `'react-router-dom'`:
+
+```javascript
+import { Link } from "react-router-dom";
+```
+
+Wrap the `<Link>` around the `<li>` in the template to turn the entire component into a clickable Router Link:
+
+```javascript
+import { Link } from "react-router-dom";
+const PokemonListItem = ({ name }) => {
+  return (
+    <Link>
+      <li>
+        <h3>{name}</h3>
+      </li>
+    </Link>
+  );
+};
+export default PokemonListItem;
+```
+
+Currently these links go nowhere. We want them to cause the router to go to the PokemonDetail view. This is defined in the `Routes.js` file a having the following path: `path="/:name"`
+
+This path only has one segment.
+The colon `':'` means that the segment is dynamic and can be used as a parameter.
+
+Visiting `localhost:3000/<anything>` will match this route.
+
+Therefore we want it so that when a link for `bulbasaur` is clicked, it triggers a path that matches this route: `localhost:3000/bulbasaur`.
+
+Do this by modifying the link as follows:
+
+```javascript
+<Link to={"/" + name}>
+```
+
+This concatenates the `name` prop after a forward slash, meaning the links in the list will now point to `localhost:3000/<pokemon name>`, which matches with the `PokemnoDetail.js` route.
+
+Now clicking on a link causes the detail view to laod with the clicked pokemon's name in the url
