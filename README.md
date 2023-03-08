@@ -120,3 +120,61 @@ const App = () => {
 };
 export default App;
 ```
+
+# Step 4
+
+## Overview
+
+Now that we have the two views ready, we need to fetch the data. The List view will render a list of Pokemon, which we will fetch from the PokeAPI:
+`https://pokeapi.co/api/v2/pokemon/`
+
+The Detail view will Render information about that pokemon fetched from that Pokemon's specific endpoint on the API:
+`https://pokeapi.co/api/v2/pokemon/bulbasaur`
+
+In order for the Detail view to know which pokemon to fetch, we will attach the name of the clicked pokemon from the list into the url path for the detail view as a dynamic segment.
+
+Then we will program the Detail view to read the dynamic segment, attach it to the end of the fetch URL to the API
+(`https://pokeapi.co/api/v2/pokemon/bulbasaur`) and fetch it that way.
+
+## Add side effect to List View
+
+When the list view renders, we want it to also fetch the list of pokemon as a side effect. We can use useEffect to set this up.
+
+Import useEffect into `PokemonList.js` so that we can use it to specify a side effect.
+
+In the component, above the template return, call useEffect and pass it a callback function, and an empty array.
+The empty array will mean this logic will only run once on first render, preventing an infinite loop.
+
+<br>
+
+`PokemonList.js`
+
+```javascript
+import { useEffect } from "react";
+
+const PokemonList = () => {
+  useEffect(() => {}, []);
+
+  return (
+    <div>
+      <h2>List</h2>
+    </div>
+  );
+};
+export default PokemonList;
+```
+
+<br>
+
+Inside this function, define the asynchronous data fetcher, and then immediately call it. For now it can console log the retreved data:
+
+```javascript
+useEffect(() => {
+  const getPokemonList = async () => {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/`);
+    const json = await response.json();
+    console.log(json);
+  };
+  getPokemonList();
+}, []);
+```
