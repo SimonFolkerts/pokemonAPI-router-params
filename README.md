@@ -389,3 +389,7 @@ const PokemonDetail = () => {
 ```
 
 Setting the initial state to `null` means that we can use conditional rendering to avoid trying to render the pokemon before its data has arrived from the async `fetch()`. Null is falsy whereas an object is truthy, so this means with conditional rendering we can use an if statement or ternary operator to prevent tyring to render anything before the data arrives, which would lead to `not defined` errors.
+
+# Step 10
+
+Render whatever you want from the pokemon object in the template of `PokemonDetail.js`!

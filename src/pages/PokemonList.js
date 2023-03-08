@@ -8,7 +8,6 @@ const PokemonList = () => {
       const response = await fetch(`https://pokeapi.co/api/v2/pokemon/`);
       const json = await response.json();
       setPokemonArray(json.results);
-      console.log(pokemonArray);
     };
     getPokemonList();
   }, []);
@@ -18,7 +17,7 @@ const PokemonList = () => {
   });
 
   return (
-    <div>
+    <div className="pokemon-list">
       <h2>List</h2>
       <ul>{listItems}</ul>
     </div>
